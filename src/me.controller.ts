@@ -1,4 +1,5 @@
 import { Controller, Get } from '@nestjs/common'
+import { HttpLab } from './meta/response';
 
 
 export interface IUser {
@@ -16,7 +17,8 @@ export class UserController {
       Path: key
       Handler: descriptor.value
     */
-    user() : IUser {
+    @HttpLab()  // debugme:
+    me(): IUser {
         return {
             login: 'anonymous'
         }

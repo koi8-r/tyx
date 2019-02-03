@@ -1,11 +1,26 @@
-import { Module } from '@nestjs/common'
+import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { DatetimeService } from './datetime.service'
+import { TodoCtl } from './toto.ctl'
+import { AcceptsMid } from './middleware/accepts.mid'
+
 
 @Module({
     imports: [],
-    controllers: [AppController],
-    providers: [AppService, DatetimeService],
+    controllers: [AppController, TodoCtl],
+    providers: [AppService,
+                DatetimeService, /*{
+                    provide: APP_FILTER,
+                    useClass: HttpErrorFilter
+                }*/],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+    // app.use(mid)
+    configure(consumer: MiddlewareConsumer) {
+        consumer.apply(AcceptsMid)  // []
+                .with('state')
+                .forRoutes(TodoCtl)
+                // .forRoutes('todo')  // { path: 'todo', method: RequestMethod.ALL }
+    }
+}
