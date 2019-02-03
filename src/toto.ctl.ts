@@ -24,4 +24,9 @@ export class TodoCtl {
     err403() {
         throw new HttpException('Forbidden', HttpStatus.FORBIDDEN)
     }
+
+    @Get('/418')
+    err418() {
+        throw new HttpException('Tea', HttpStatus.I_AM_A_TEAPOT)
+    }
 }
