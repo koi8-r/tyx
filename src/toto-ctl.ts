@@ -1,22 +1,24 @@
 import { Controller, Get, Post, Body, HttpException, HttpStatus, UseFilters } from "@nestjs/common"
-import { Todo } from "./model/todo"
+import { ITodo } from "./model/itodo"
+import { TodoDto } from "./model/todo"
 import { HttpErrorFilter } from "./err-filter";
+import { TodoRepository } from './svc/todo-repository'
 
 
 @UseFilters(HttpErrorFilter)
 @Controller('/todo')
 export class TodoCtl {
 
-    constructor() {}
+    constructor(private readonly repository: TodoRepository) {}
 
     @Get()
-    list() : Promise<Todo[]> {
-        return Promise.resolve([])
+    async list() : Promise<ITodo[]> {
+        return this.repository.list()
     }
 
     @Post()
-    create(@Body() dto : Todo ) : void {
-
+    create(@Body() dto : TodoDto ) : void {
+        this.repository.create(dto)
     }
 
     @Get('/403')

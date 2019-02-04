@@ -2,14 +2,16 @@ import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { DatetimeService } from './datetime.service'
-import { TodoCtl } from './toto.ctl'
+import { TodoCtl } from './toto-ctl'
 import { AcceptsMid } from './middleware/accepts.mid'
+import { TodoRepository } from './svc/todo-repository'
 
 
 @Module({
     imports: [],
     controllers: [AppController, TodoCtl],
     providers: [AppService,
+                TodoRepository,
                 DatetimeService, /*{
                     provide: APP_FILTER,
                     useClass: HttpErrorFilter
