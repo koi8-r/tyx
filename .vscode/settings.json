@@ -6,8 +6,13 @@
     "python.jediEnabled": false,
     "terminal.integrated.rendererType": "dom",
     "workbench.iconTheme": "vscode-great-icons",
-    "editor.fontFamily": "Consolas, CamingoCode, 'Fira Code', 'Anonymous Pro', CamingoCode, Cousine, 'Fira Code', Hack, 'IBM Plex Mono', Inconsolata, Monoid, 'Roboto Mono', 'Liberation Mono', 'Noto Sans Mono', 'Droid Sans Mono'",
+    "editor.fontFamily": "CamingoCode, 'Fira Code', Consolas, 'Anonymous Pro', CamingoCode, Cousine, Hack, 'IBM Plex Mono', Inconsolata, Monoid, 'Roboto Mono', 'Liberation Mono', 'Noto Sans Mono', 'Droid Sans Mono'",
     "editor.fontLigatures": true,
     "editor.minimap.enabled": false,
-    "editor.fontSize": 20
+    "editor.fontSize": 20,
+    "files.watcherExclude": {
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/node_modules/*/**": true
+    }
 }
