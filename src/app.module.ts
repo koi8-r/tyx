@@ -5,13 +5,14 @@ import { DatetimeService } from './datetime.service'
 import { TodoCtl } from './toto-ctl'
 import { AcceptsMid } from './middleware/accepts.mid'
 import { TodoRepository } from './svc/todo-repository'
-
+import { AProvider } from './di/a-provider'
 
 @Module({
     imports: [],
     controllers: [AppController, TodoCtl],
     providers: [AppService,
                 TodoRepository,
+                AProvider,
                 DatetimeService, /*{
                     provide: APP_FILTER,
                     useClass: HttpErrorFilter
