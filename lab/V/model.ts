@@ -3,7 +3,7 @@ import { Str } from "./annotations"
 
 
 export class Todo {
-    @Str title : string
+    @Str() title : string
 }
 
 

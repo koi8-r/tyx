@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common"
+import { Injectable, Inject } from "@nestjs/common"
 import { ITodo } from "src/model/itodo"
 import { TodoDto } from "src/model/todo"
 
@@ -6,7 +6,7 @@ import { TodoDto } from "src/model/todo"
 @Injectable()
 export class TodoRepository {
 
-    private readonly items: ITodo[] = [ { title: 'Buy milk' } ]
+    protected readonly items: ITodo[] = [ { title: 'Buy milk' } ]
 
     async list() : Promise<ITodo[]> { return this.items }
 

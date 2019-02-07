@@ -6,13 +6,30 @@ import { TodoCtl } from './toto-ctl'
 import { AcceptsMid } from './middleware/accepts.mid'
 import { TodoRepository } from './svc/todo-repository'
 import { AProvider } from './di/a-provider'
+import HelloValueProvider from './di/hello-provider'
+import { ITodo } from "src/model/itodo"
+
 
 @Module({
     imports: [],
     controllers: [AppController, TodoCtl],
     providers: [AppService,
-                TodoRepository,
+                {
+                    provide: TodoRepository,
+                    // useClass injected and instantiated by engine
+                    // useClass: TodoRepository,
+                    // useValue needs instance object
+                    useValue: new (class _ extends TodoRepository{
+                        protected readonly items: ITodo[] = [ { title: 'Buy milk and tea' } ]
+                    })()
+                },
+                // resolved provider
+                {
+                    provide: 'Options',
+                    useValue: '!!!'
+                },
                 AProvider,
+                HelloValueProvider,
                 DatetimeService, /*{
                     provide: APP_FILTER,
                     useClass: HttpErrorFilter

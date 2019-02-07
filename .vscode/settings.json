@@ -9,7 +9,7 @@
     "editor.fontFamily": "CamingoCode, 'Fira Code', Consolas, 'Anonymous Pro', CamingoCode, Cousine, Hack, 'IBM Plex Mono', Inconsolata, Monoid, 'Roboto Mono', 'Liberation Mono', 'Noto Sans Mono', 'Droid Sans Mono'",
     "editor.fontLigatures": true,
     "editor.minimap.enabled": false,
-    "editor.fontSize": 20,
+    "editor.fontSize": 14,
     "files.watcherExclude": {
         "**/.git/objects/**": true,
         "**/.git/subtree-cache/**": true,
