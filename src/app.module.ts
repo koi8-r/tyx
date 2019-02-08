@@ -46,6 +46,13 @@ const TodoSchema = new mongoose.Schema({
                 DatetimeService, /*{
                     provide: APP_FILTER,
                     useClass: HttpErrorFilter
+                }*/,
+                /*
+                // mongoose model connection provider
+                {
+                    provide: 'TodoModelToken',
+                    useFactory: (connection: Connection) => connection.model('Todo', TodoSchema),
+                    inject: ['ConnectionToken'],
                 }*/],
 })
 export class AppModule implements NestModule {

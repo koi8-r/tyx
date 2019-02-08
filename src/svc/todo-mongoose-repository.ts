@@ -1,6 +1,5 @@
 import { Injectable, Inject } from "@nestjs/common"
 import { ITodo } from "src/model/itodo"
-import { TodoDto } from "src/model/todo"
 import { InjectModel } from "@nestjs/mongoose";
 import { Model, Document } from "mongoose";
 
@@ -14,11 +13,11 @@ export class TodoMongooseRepository {
 
     constructor(@InjectModel('Todo') private readonly todoModel: Model<Todo>) {}
 
-    async list() : Promise<Todo[]> {
+    async list() : Promise<ITodo[]> {
         return this.todoModel.find().exec()
     }
 
-    async create(dto: ITodo) : Promise<Todo> {
+    async create(dto: ITodo) : Promise<ITodo> {
         return new this.todoModel(dto).save()
     }
 }
