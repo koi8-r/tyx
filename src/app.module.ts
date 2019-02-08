@@ -5,13 +5,25 @@ import { DatetimeService } from './datetime.service'
 import { TodoCtl } from './toto-ctl'
 import { AcceptsMid } from './middleware/accepts.mid'
 import { TodoRepository } from './svc/todo-repository'
+import { TodoMongooseRepository } from './svc/todo-mongoose-repository'
 import { AProvider } from './di/a-provider'
 import HelloValueProvider from './di/hello-provider'
 import { ITodo } from "src/model/itodo"
+import { MongooseModule } from '@nestjs/mongoose'
+import * as mongoose from 'mongoose'
+
+
+// ITodo in fact
+const TodoSchema = new mongoose.Schema({
+    title: String
+})
 
 
 @Module({
-    imports: [],
+    imports: [MongooseModule.forRoot('mongodb://localhost/tyx',{
+                                     useNewUrlParser: true }),
+              // register feature for separate modules
+              MongooseModule.forFeature([{ name: 'Todo', schema: TodoSchema }]) ],
     controllers: [AppController, TodoCtl],
     providers: [AppService,
                 {
@@ -23,6 +35,7 @@ import { ITodo } from "src/model/itodo"
                         protected readonly items: ITodo[] = [ { title: 'Buy milk and tea' } ]
                     })()
                 },
+                TodoMongooseRepository,
                 // resolved provider
                 {
                     provide: 'Options',

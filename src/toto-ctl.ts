@@ -3,8 +3,8 @@ import { ITodo } from "./model/itodo"
 import { TodoDto } from "./model/todo"
 import { HttpErrorFilter } from "./err-filter";
 import { TodoRepository } from './svc/todo-repository'
+import { TodoMongooseRepository } from './svc/todo-mongoose-repository'
 import { ModuleRef } from "@nestjs/core";
-import { ModuleMetadata } from "@nestjs/common/interfaces";
 import { Nothing, ValidatePipe } from "./nothing-deco";
 
 
@@ -14,6 +14,8 @@ export class TodoCtl implements OnModuleInit {
 
     constructor(@Inject(TodoRepository)
                 private readonly repository: TodoRepository,
+                @Inject(TodoMongooseRepository)
+                private readonly mongooseRepository: TodoMongooseRepository,
                 @Inject('A')
                 private readonly a: string,
                 @Inject('Options')
@@ -36,12 +38,14 @@ export class TodoCtl implements OnModuleInit {
 
     @Get()
     async list() : Promise<ITodo[]> {
-        return this.repository.list()
+        //return this.repository.list()
+        return this.mongooseRepository.list()
     }
 
     @Post()
-    create(@Body() dto : TodoDto ) : void {
-        this.repository.create(dto)
+    create(@Body() dto : TodoDto) : void {
+        //this.repository.create(dto)
+        this.mongooseRepository.create(dto)
     }
 
     @Get('/403')
