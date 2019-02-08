@@ -10,7 +10,7 @@ export class TodoRepository {
 
     async list() : Promise<ITodo[]> { return this.items }
 
-    async create(item: TodoDto) : Promise<ITodo> {
+    async create(item: ITodo) : Promise<ITodo> {
         this.items.push(item)
         return item
     }

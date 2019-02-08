@@ -40,7 +40,7 @@ export class TodoCtl implements OnModuleInit {
     }
 
     @Post()
-    create(@Body() dto : TodoDto ) : void {
+    create(@Body() dto : ITodo ) : void {
         this.repository.create(dto)
     }
 
