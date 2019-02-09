@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, HttpException, HttpStatus, UseFilters, Inject, OnModuleInit } from "@nestjs/common"
+import { Controller, Get, Post, Body, HttpException, HttpStatus, UseFilters, Inject, OnModuleInit, UsePipes, Param, ParseIntPipe } from "@nestjs/common"
 import { ITodo } from "./model/itodo"
 import { TodoDto } from "./model/todo"
 import { HttpErrorFilter } from "./err-filter";
@@ -6,6 +6,7 @@ import { TodoRepository } from './svc/todo-repository'
 import { ModuleRef } from "@nestjs/core";
 import { ModuleMetadata } from "@nestjs/common/interfaces";
 import { Nothing, ValidatePipe } from "./nothing-deco";
+import { IdentifyPipe } from "./identify-pipe";
 
 
 @Controller('/todo')
@@ -40,8 +41,17 @@ export class TodoCtl implements OnModuleInit {
     }
 
     @Post()
-    create(@Body() dto : ITodo ) : void {
+    // async create(@Body(new ValidationPipe({ transform: true, forbidNonWhitelisted: true, forbidUnknownValues: true })) dto: TodoDto) {
+    // @UsePipes(new IdentifyPipe(TodoDto))
+    create(@Body(new IdentifyPipe(TodoDto)) dto : ITodo ) : void {
         this.repository.create(dto)
+    }
+
+    @Get(':id')
+    async get(@Param('id', ParseIntPipe) id: number,
+              // @Param('id', UserEntityPipe) user: userEntity
+          ) : Promise<ITodo> {
+        return new TodoDto(id.toString())
     }
 
     @Get('/403')

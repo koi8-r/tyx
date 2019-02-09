@@ -3,7 +3,9 @@ import { IsString } from 'class-validator'
 
 
 export class TodoDto implements ITodo {
-    constructor(title: string) {}
+    constructor(title: string) {
+        this.title = title
+    }
 
     @IsString()
     readonly title: string
