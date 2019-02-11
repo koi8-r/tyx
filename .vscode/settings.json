@@ -19,5 +19,6 @@
     },
     "files.exclude": {
         "db/": true
-    }
+    },
+    "python.linting.pylintEnabled": true
 }

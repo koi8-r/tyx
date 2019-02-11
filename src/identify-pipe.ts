@@ -2,6 +2,7 @@ import { Injectable, PipeTransform, ArgumentMetadata, BadRequestException } from
 import { IsString, validate, ValidationError } from 'class-validator'
 import { plainToClass } from 'class-transformer'
 import { ClassType } from "class-transformer/ClassTransformer"
+import 'reflect-metadata'  // need for class-transformer?
 
 
 /*
