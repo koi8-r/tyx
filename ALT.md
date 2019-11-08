@@ -1,0 +1,4 @@
+- dinoloop
+- inversify
+- typescript-ioc
+- microsoft/tsyringe
